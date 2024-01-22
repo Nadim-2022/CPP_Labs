@@ -19,22 +19,25 @@
 
 int main() {
     std::string line;
-    while (true){
+    bool stop = false;
+    while (!stop){
         std::cout << "Enter a line with numbers or \"stop\": ";
         std::getline(std::cin, line);
         if (line.find("stop") == 0){
             std::cout << "Program has been stopped !\n";
-            break;
+            stop = true;
+        }else{
+            std::istringstream stream(line);
+            int sum = 0;
+            int count = 0;
+            int number;
+            while (stream >> number){
+                sum += number;
+                count++;
+            }
+            std::cout << "Total of " << count << " numbers is " << sum << std::endl;
         }
-        std::istringstream stream(line);
-        int sum = 0;
-        int count = 0;
-        int number;
-        while (stream >> number){
-            sum += number;
-            count++;
-        }
-        std::cout << "Total of " << count << " numbers is " << sum << std::endl;
+
     }
     return 0;
 }

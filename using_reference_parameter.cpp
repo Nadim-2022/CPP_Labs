@@ -17,6 +17,7 @@
 #include <iostream>
 #include <string>
 
+
 void replace_character(std::string &str, char character){
 
     for (char & i : str){
@@ -40,17 +41,20 @@ void replace_character(std::string &str, char character){
 int main() {
     std::string str;
     std::string character;
-    while (true){
+    bool stop = false;
+    while (!stop){
         std::cout << "Enter a string: ";
         std::getline(std::cin, str);
         std::cout << "Enter character to replace or \"stop\" : ";
         std::getline(std::cin, character);
        if(!character.compare("stop")){
            std::cout << "\nProgram has been stopped !\n";
-            break;
+           stop = true;
+       }else{
+           replace_character(str, character[0]);
+           std::cout << "Result: " << str << std::endl;
        }
-        replace_character(str, character[0]);
-        std::cout << "Result: " << str << std::endl;
+
     }
     return 0;
 }
