@@ -47,7 +47,7 @@ int main() {
         std::getline(std::cin, str);
         std::cout << "Enter character to replace or \"stop\" : ";
         std::getline(std::cin, character);
-       if(!character.compare("stop")){
+       if(character == "stop"){
            std::cout << "\nProgram has been stopped !\n";
            stop = true;
        }else{

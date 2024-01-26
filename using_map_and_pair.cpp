@@ -43,23 +43,24 @@ Enter name or “stop” or “print”: stop
 int main(){
     std::map<std::string, int> myMap;
     std::string name;
+    int number;
     bool stop = false;
     while (!stop){
-        std::cout << "Enter name or \"stop\" or \"print\": ";
-        std::getline(std::cin, name);
-        if (name.compare("stop") == 0){
+        std::cout << R"(Enter name or "stop" or "print": )";
+        std::cin >> name;
+        if (name == "stop"){
             std::cout << "Program has been stopped !\n";
             stop = true;
-        }else if (name.compare("print") == 0){
-            for (auto it = myMap.begin(); it != myMap.end(); it++){
-                std::cout << it->first << " : " << it->second << std::endl;
+        }else if (name == "print"){
+            for (const auto & it : myMap){
+                std::cout << it.first << " : " << it.second << std::endl;
             }
+            stop = true;
         }else{
-            int number;
             std::cout << "Enter integer: ";
             std::cin >> number;
             myMap.insert(std::pair<std::string, int>(name, number));
-            std::cin.ignore();
+            //std::cin.ignore();
         }
     }
     return 0;
