@@ -40,73 +40,10 @@ std::getline(std::cin, my_str, ':');
 #include <string>
 
 class House{
-private:
-    std::string address;
-    double area;
-    int price;
-public:
-    House() = default;
-    House(std::string address, double area, int price) : address(address), area(area), price(price) {}
-    friend std::ostream & operator<<(std::ostream & os, const House & house);
-    friend std::istream & operator>>(std::istream & is, House & house);
-    bool operator<(const House & house) const;
-    void setAddress(std::string address);
-    void setArea(double area);
-    void setPrice(int price);
-
-};
-
-std::ostream & operator<<(std::ostream & os, const House & house){
-    os << house.address << " " << house.area << " " << house.price;
-    return os;
-}
-
-std::istream & operator>>(std::istream & is, House & house){
-    is >> house.address >> house.area >> house.price;
-    return is;
-}
-
-bool House::operator<(const House & house) const {
-    return price / area < house.price / house.area;
-}
-
-void House::setAddress(std::string address) {
-    House::address = address;
-}
-
-void House::setArea(double area) {
-    House::area = area;
-}
-
-void House::setPrice(int price) {
-    House::price = price;
-}
-
-int main(){
-    std::vector<House> houses;
-    for (int i = 0; i < 5; i++){
-        std::cout << "Enter address, area and price: ";
-        House house;
-        std::cin >> house;
-        houses.push_back(house);
-    }
-    std::sort(houses.begin(), houses.end());
-    for (const auto & house : houses){
-        std::cout << house << std::endl;
-    }
-    return 0;
-}
-/*
- #include <iostream>
-#include <vector>
-#include <algorithm>
-#include <string>
-
-class House{
     friend std::ostream &operator<<(std::ostream &OUT, const House &house);
     friend std::istream &operator>>(std::istream &CIN , House &house);
 public:
-    House();
+    House() :  area(0.0), price(0) {};
     House(std::string &address0, double area0, int price0);
     void setAddress(std::string &address0);
     void setArea(double area0);
@@ -134,11 +71,12 @@ void House::setPrice(int price0) {
 std::ostream &operator<<(std::ostream &COUT, const House &house){
     return COUT << house.address << " " << house.area << " "<<house.price;
 }
-/*
 std::istream &operator>>(std::istream  &CIN, House &house){
-    return CIN >> house.address >> house.area >> house.price;
+    std::getline(CIN, house.address, ':');
+    CIN >> house.area >> house.price;
+    return CIN;
 }
-*/
+
 bool House::operator<(const House &house) const{
     return price / area < house.price / house.area;
 }
@@ -146,48 +84,38 @@ bool House::operator<(const House &house) const{
 
 int main(){
     std::vector<House> houses;
-    //Ask user to enter the house informa3on (address, area, price) and use constructor to create
-    //a house by passing the informa3on as parameters
-
-    std::cout << " Enter the house information (address, area, price): " << std::endl;
     std::string address;
     double area;
     int price;
+    //Ask user to enter the house information (address, area, price) and use constructor to create
     for (int i = 0; i < 3; i++){
         std::cout << "Enter address, area and price: ";
-        std::cin >> address >> area >> price;
-        //House house(address, area, price);
-        houses.push_back(House(address, area, price));
+        std::getline(std::cin, address, ':');
+        std::cin >> area >> price;
+        House house(address, area, price);
+        houses.push_back(house);
     }
-
-
-    //Create a house using default constructor, ask user to enter the house informa3on and use
-    //seJer func3ons before adding the house to the vector
-    std::cout << "Enter the house information (address, area, price): " << std::endl;
+    //Create a house using default constructor, ask user to enter the house information and use
     House house;
-    for (int i = 0; i < 5; i++){
-        std::cout << "Enter address, area and price: ";
-        std::cin >> address >> area >> price;
-        house.setAddress(address);
-        house.setArea(area);
-        house.setPrice(price);
-        houses.push_back(house);
-    }
+    std::cout << "Enter address, area and price: ";
+    std::getline(std::cin, address, ':');
+    std::cin >> area >> price;
+    house.setAddress(address);
+    house.setArea(area);
+    house.setPrice(price);
+    houses.push_back(house);
+
     //Create house using default constructor and read values using the input operator
-    std::cout << "Enter the house information (address, area, price): " << std::endl;
-    for (int i = 0; i < 5; i++){
-        std::cout << "Enter address, area and price: ";
-        std::cin >> house;
-        houses.push_back(house);
-    }
+    House house1;
+    std::cout << "Enter address, area and price: ";
+    std::cin >> house1;
+    houses.push_back(house1);
 
     std::sort(houses.begin(), houses.end());
-    for (const auto & house : houses){
-        std::cout << house << std::endl;
+    for (const auto & Nadim : houses){
+        std::cout << Nadim << std::endl;
     }
     return 0;
 
 
 }
-
-*/
