@@ -55,7 +55,7 @@ int main() {
     std::set_intersection(Lotto.begin(), Lotto.end(), Lotto2.begin(), Lotto2.end(), std::back_inserter(commonNumber));
     std::cout<< "Matching numbers: " <<std::endl;
     std::for_each(commonNumber.begin(), commonNumber.end(), IndexPrinter());
-
+    
     std::vector<int> Lotto3(5);
     std::generate(Lotto3.begin(), Lotto3.end(), LottoNumberGenerator(1, 50));
     std::cout<< "Eurojackpot: ";
