@@ -34,7 +34,7 @@ void LimitedCounter::inc (){
     }
 }
 void LimitedCounter::dec() {
-    if (value < 0){
+    if (value > 0){
         value--;
     }
 }
@@ -54,17 +54,21 @@ private:
 };
 OverflowCounter::OverflowCounter(int value0, int upperLimit0) {
     value = value0;
-    value = upperLimit0;
+   upperLimit = upperLimit0;
 }
 
 void OverflowCounter::inc() {
     if (value >= upperLimit){
         value = 0;
+    }else{
+        value++;
     }
 }
 void OverflowCounter::dec() {
     if (value <= 0){
         value = upperLimit;
+    } else{
+        value--;
     }
 }
 OverflowCounter::operator int() {
@@ -96,7 +100,6 @@ int main(int argc, char** argv) {
     cout << oc << endl; // should display 9
     oc.dec();
     cout << oc << endl; // should display 8
-/*
     cout << lc << endl;
     lc.inc();
     cout << lc << endl;
@@ -106,6 +109,5 @@ int main(int argc, char** argv) {
     cout << lc << endl;
     UseCounter(lc, -9);
     cout << lc << endl;
-*/
     return 0;
 }
