@@ -72,7 +72,6 @@ void Spy::interrogate() {
 
 }
 
-
 class Judge: public Person, public Observer {
 public:
     Judge(const char* name0): Person(name0){};
