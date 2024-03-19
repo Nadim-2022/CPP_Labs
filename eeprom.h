@@ -148,6 +148,21 @@ public:
         std::string str(reinterpret_cast<char*>(data));
         return str;
     }
+    void write_number(uint16_t address, uint16_t number) {
+        uint8_t data[2];
+        data[0] = (number >> 8) & 0xFF;  // High byte of number
+        data[1] = number & 0xFF;  // Low byte of number
+        eeprom_write_bytes(address, data, 2);
+    }
+
+    uint16_t read_number(uint16_t address) {
+        uint8_t data[2];
+        eeprom_read_bytes(address, data, 2);
+
+        // Combine high and low bytes into a number
+        uint16_t number = ((uint16_t)data[0] << 8) | data[1];
+        return number;
+    }
 };
 
 #endif //CPP_LABS_EEPROM_H
